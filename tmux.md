@@ -7,12 +7,14 @@ All commands start with ctrl+b.  This will be further referenced as "cmd".  A co
 
 ## Session management
 
+Sessions are persistent so that they remain running.  For example, you can connect remotely using ssh, start a tmux session, detach the session, and disconnect from ssh.  Upon reconnecting with ssh, reattaching to the existing tmux session will bring back all previously running programs.  It is also possible for two users to concurrently join the same session.
+
 New session - `tmux`\
 New named session - `tmux new -s named_session`\
-Reattach to last session - `tmux a`\
+**Reattach to last session - `tmux a`**\
 Reattach to a named session - `tmux a -t named_session`\
-List sessions - `tmux ls`\
-Detach from session - `cmd d`\
+**List sessions - `tmux ls`**\
+**Detach from session - `cmd d`**\
 Kill session - `tmux kill-session -t named_session`\
 Rename session - `cmd $`\
 Switch session\
@@ -22,21 +24,21 @@ Switch session\
 
 ## Window management
 
-New window - `cmd c`\
-Rename window - `cmd ,`\
-Previous window - `cmd p`\
-Next window - `cmd n`\
+**New window - `cmd c`**\
+**Rename window - `cmd ,`**\
+**Previous window - `cmd p`**\
+**Next window - `cmd n`**\
 Select window by number - `cmd 0-9`\
 Show selectable list - `cmd w`\
 Kill window - `cmd &`
 
 ## Pane management
 
-Split horizontally - `cmd "`\
-Split vertically - `cmd %`\
-Change pane - `cmd arrow`\
+**Split horizontally - `cmd "`**\
+**Split vertically - `cmd %`**\
+**Change pane - `cmd arrow`**\
 Change pane clockwise - `cmd o`\
 Toggle last active - `cmd ;`\
-Resize pane - `cmd+arrow`\
+**Resize pane - `cmd+arrow`**\
 Kill pane - `cmd x`\
 Convert pane to window - `cmd !`
