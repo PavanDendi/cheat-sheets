@@ -42,3 +42,22 @@ Toggle last active - `cmd ;`\
 **Resize pane - `cmd+arrow`**\
 Kill pane - `cmd x`\
 Convert pane to window - `cmd !`
+
+## Configuration changes
+
+Create/modify ~/.tmux.conf
+
+### For tmux < 2.1
+```
+# Make mouse useful in copy mode
+setw -g mode-mouse on
+
+# Allow mouse to select which pane to use
+set -g mouse-select-pane on
+
+# Allow mouse dragging to resize panes
+set -g mouse-resize-pane on
+
+# Allow mouse to select windows
+set -g mouse-select-window on
+```
