@@ -48,6 +48,7 @@ Convert pane to window - `cmd !`
 Create/modify ~/.tmux.conf
 
 ### For tmux < 2.1
+
 ```
 # Make mouse useful in copy mode
 setw -g mode-mouse on
@@ -60,4 +61,10 @@ set -g mouse-resize-pane on
 
 # Allow mouse to select windows
 set -g mouse-select-window on
+```
+
+### For tmux > 2.1
+
+```
+set -g mouse on
 ```
