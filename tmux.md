@@ -3,7 +3,7 @@
 All commands start with ctrl+b.  This will be further referenced as "cmd".  A common modification of the default config is to change this to ctrl+a for easier typing and not conflicting with vim.
 
 `cmd b` - denotes that cmd should be fully released before entering 'b'\
-`cmd+b` - denotes that cmb should be held down while entering 'b'
+`cmd+b` - denotes that cmd should be held down while entering 'b'
 
 ## Session management
 
