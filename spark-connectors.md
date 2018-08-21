@@ -39,6 +39,10 @@ val teradf = spark.read.format("jdbc")
 ```
 df.write.partitionBy("dataDt")
     .option("path","path/to/hdfs/location/")
+    .mode("append")
+    // .mode("overwrite")
+    // .mode(SaveMode.Append)
+    // .mode(SaveMode.OverWrite)
     .saveAsTable("db_name.table_name")
 ```
 
