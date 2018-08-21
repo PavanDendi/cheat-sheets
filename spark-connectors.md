@@ -31,3 +31,21 @@ val teradf = spark.read.format("jdbc")
     .option("driver","com.teradata.jdbc.TeraDriver")
     .load()
 ```
+
+## Hive/Impala
+
+### Create external table from DataFrame
+
+```
+df.write.partitionBy("dataDt")
+    .option("path","path/to/hdfs/location/")
+    .saveAsTable("db_name.table_name")
+```
+
+### Update Impala metadata to see new table
+```
+INVALIDATE METADATA [[db_name.]table_name]
+```
+Calling INVALIDATE METADATA without a table_name will flush metadata for entire catalog.
+
+Can also try REFRESH to see new data for existing table
