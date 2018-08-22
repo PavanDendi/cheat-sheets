@@ -24,3 +24,17 @@ val df = spark.read.option("header", "false")
 val pw = spark.read.textFile("file:///absolute_path/to/password.txt").take(1)(0)
 val pw = sc.textFile("file:///absolute_path/to/password.txt").take(1)(0)
 ```
+
+## execute shell commands
+required import:
+```
+import sys.process._
+```
+return exit code from executed string
+```
+val exit_code = "ls -al".!
+```
+return output from executed string
+```
+val cmd_output = "ls -al".!!
+```
