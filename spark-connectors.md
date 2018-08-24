@@ -31,6 +31,48 @@ val teradf = spark.read.format("jdbc")
     .option("driver","com.teradata.jdbc.TeraDriver")
     .load()
 ```
+## MySQL
+
+### Add JDBC driver as dependency or include jar file
+
+#### As dependency
+As argument for spark-shell:
+```
+-- packages com.microsoft.sqlserver:mssql-jdbc:7.0.0.jre8
+```
+As dependency for build.sbt:
+```
+// libraryDependencies += groupID % artifactID % revision % configuration
+libraryDependencies += "com.microsoft.sqlserver" % "mssql-jdbc" % "7.0.0.jre8"
+```
+
+### Read
+```
+val sqldf = spark.read
+    .format("jdbc")
+    .option("url","jdbc:sqlserver://server_name")
+    .option("database", "database_name")
+    .option("dbtable","db.table")
+    .option("user","username")
+    .option("password","password")
+    .option("driver","com.microsoft.sqlserver.jdbc.SQLServerDriver")
+    .load()
+```
+
+### Write
+```
+df.write.
+    .format("jdbc")
+    .option("url","jdbc:sqlserver://server_name")
+    .option("database", "database_name")
+    .option("dbtable","db.table")
+    .option("user","username")
+    .option("password","password")
+    .option("driver","com.microsoft.sqlserver.jdbc.SQLServerDriver")
+    .option("truncate", "true")
+    .mode("overwrite")
+    save()
+```
 
 ## Hive/Impala
 
