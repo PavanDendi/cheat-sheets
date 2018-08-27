@@ -15,7 +15,7 @@ val custom_schema = StructType(Array(
 
 val df = spark.read.option("header", "false")
                     .option("delimiter","|")
-                    .schema(holdout_schema)
+                    .schema(custom_schema)
                     .csv("/path/to/file.csv")
 ```
 
