@@ -88,7 +88,7 @@ df.write.
     .option("driver","com.microsoft.sqlserver.jdbc.SQLServerDriver")
     .option("truncate", "true")
     .mode("overwrite")
-    save()
+    .save()
 ```
 
 ## MySQL
