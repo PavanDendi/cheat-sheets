@@ -8,6 +8,23 @@
 ### read file using traditional spark.read API, but specify file location using s3a://
     val s3df = spark.read.csv("s3a://bucket_name/path/to/file.csv")
 
+## Execute SQL query for JDBC reads
+
+SQL queries can be given instead of a table name for the `dbtable` option.  Spark is basically doing a `SELECT * FROM $dbtable`, so queries must be in parentheses and a table name given.
+
+```
+val sqldf = spark.read.format("jdbc")
+    .option("dbtable", "(SELECT * FROM db.table) foo")
+```
+Reading a complex query from a file:
+```
+val query = scala.io.Source.fromFile("complex_query.sql").getLines.mkString
+val formatted_query = "(" + query + ") foo"
+
+val sqldf = spark.read.format("jdbc")
+    .option("dbtable", formatted_query)
+```
+
 ## Teradata
 
 ### Download JDBC drivers from teradata, both terajdbc4.jar and tdgssconfig.jar are needed
@@ -31,7 +48,7 @@ val teradf = spark.read.format("jdbc")
     .option("driver","com.teradata.jdbc.TeraDriver")
     .load()
 ```
-## MySQL
+## Microsoft SQL Server
 
 ### Add JDBC driver as dependency or include jar file
 
@@ -72,6 +89,24 @@ df.write.
     .option("truncate", "true")
     .mode("overwrite")
     save()
+```
+
+## MySQL
+
+Two main versions of JDBC driver exist, 5 and 8:
+```
+mysql:mysql-connector-java:5.1.47
+mysql:mysql-connector-java:8.0.12
+```
+Read/write is similar to Teradata and MS SQL.  The "database" option is not needed.
+
+Spark Driver for version 5:
+```
+.option("driver","com.mysql.jdbc.Driver")
+```
+Above has been deprecated but still works for version 8.  Recommended to use:
+```
+.option("driver","com.mysql.cj.jdbc.Driver")
 ```
 
 ## Hive/Impala
