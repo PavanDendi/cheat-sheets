@@ -1,4 +1,5 @@
 ## access local files
+Spark master must be local.  If it is YARN, file will not be found unless file exists across all nodes.
 ```
 val df = spark.read.parquet("file:///absolute_path/to/file.parquet")
 ```
@@ -20,9 +21,18 @@ val df = spark.read.option("header", "false")
 ```
 
 ## read text file
+
+### read single line
 ```
 val pw = spark.read.textFile("file:///absolute_path/to/password.txt").take(1)(0)
 val pw = sc.textFile("file:///absolute_path/to/password.txt").take(1)(0)
+```
+
+### read entire file as single string
+```
+val query = scala.io.Source.fromFile("complex_query.sql").getLines.mkString
+val query = spark.read.textFile("complex_query.sql").collect.mkString
+val query = sc.textFile("complex_query.sql").collect.mkString
 ```
 
 ## execute shell commands
@@ -58,12 +68,9 @@ testmap.keysIterator.contains("df_key")
 ```
 com.lihaoyi %% ujson % 0.6.6
 ```
-Read whole file from HDFS as string
+Parse a json string
 ```
-val json_string = scala.io.Source.fromFile("filename.json").getLines.mkString
-```
-Parse the string
-```
+val json_string = sc.textFile("sample.json").collect.mkString
 val parsed: ujson.Js = ujson.read(json_string)
 ```
 Access keys/values similar to Python
