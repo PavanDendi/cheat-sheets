@@ -48,6 +48,13 @@ return output from executed string
 ```
 val cmd_output = "ls -al".!!
 ```
+To run as a shell command.  Useful if scala cannot parse complex arguments such as SQL queries.
+```
+Seq("/bin/sh", "-c", shellCmd)
+```
+`!` and `!!` are blocking calls.  If you want to run a command and send it to background, use `run`.\
+This will return a `Process` class that has `destroy` and `exitValue` methods.\
+`exitValue` is also a blocking call if the command has not exited.
 
 ## Maps
 
@@ -90,3 +97,13 @@ for ((k,v) <- parsed.obj) {
     println(v)
 }
 ```
+
+## Column order for unions
+As of spark 2.2, a union between two DataFrames must have the same order of columns, even if the schema is otherwise identical.
+
+It seems that the union does not match up column names which leads to values being mapped to wrong columns or null values.
+
+http://lobotomys.blogspot.com/2017/07/spark-union-column-order-issue.html\
+https://issues.apache.org/jira/browse/SPARK-21109\
+https://issues.apache.org/jira/browse/SPARK-21043\
+https://stackoverflow.com/questions/38084117/spark-dataframes-how-can-i-change-the-order-of-columns-in-java-scala
