@@ -107,3 +107,10 @@ http://lobotomys.blogspot.com/2017/07/spark-union-column-order-issue.html\
 https://issues.apache.org/jira/browse/SPARK-21109\
 https://issues.apache.org/jira/browse/SPARK-21043\
 https://stackoverflow.com/questions/38084117/spark-dataframes-how-can-i-change-the-order-of-columns-in-java-scala
+
+## Casting columns to different data types
+```
+import org.apache.spark.sql.types._
+
+df = df.withColumn("col_name", $"col_name".cast(StringType))
+```
