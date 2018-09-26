@@ -114,3 +114,33 @@ import org.apache.spark.sql.types._
 
 df = df.withColumn("col_name", $"col_name".cast(StringType))
 ```
+## Regex replacement of all white space
+str.replaceAll() accepts regex expressions
+```
+str.replaceAll("\\s+", " ")
+```
+## Working with Dates and Time
+```
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+```
+java.time library uses ISO format by default
+```
+>>> val date = LocalDate.parse("2018-03-01")
+>>> 2018-03-01
+
+>>> val datedt = LocalDateTime.parse("2018-03-01T00:00:00")
+>>> 2018-03-01T00:00:00
+
+>>> datedt.plusDays(1).toString().replace("T"," ")
+>>> 2018-03-02 00:00:01
+```
+Specifying custom formats
+```
+scala> val date = LocalDate.parse("01/01/2020", DateTimeFormatter.ofPattern("MM/dd/yyyy"))
+date: java.time.LocalDate = 2020-01-01
+
+scala> date.format(DateTimeFormatter.ofPattern("yyyy.MM.dd"))
+res0: String = 2020.01.01
+```
