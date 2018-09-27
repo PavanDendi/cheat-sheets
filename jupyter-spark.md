@@ -29,6 +29,10 @@ c.NotebookApp.password = 'sha1:67c9e60bb8b6:9ffede0825894254b2e042ea597d771089e1
 c.NotebookApp.keyfile = u'/home/BRINKER/pdendi/jupyter/mykey.key'
 c.NotebookApp.certfile = u'/home/BRINKER/pdendi/jupyter/mycert.pem'
 ```
+### Start Jupyter on a different port
+```
+jupyter notebook --port #####
+```
 ## Apache Toree: Spark kernel for Jupyter Notebooks
 As of 09/26/2018, Toree is still in incubating status.  Installation source will probably change with final release
 ```
