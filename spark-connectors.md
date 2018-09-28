@@ -24,6 +24,16 @@ val formatted_query = "(" + query + ") foo"
 val sqldf = spark.read.format("jdbc")
     .option("dbtable", formatted_query)
 ```
+### SQL query formatting for MySQL
+Database/field names might need to be surrounded by backticks to prevent overlap with reserved keywords.  
+For example, if the JDBC driver complains about:
+```
+(select * from db.values limit 10) as foo
+```
+Try changing the query to:
+```
+(select * from `db`.`values` limit 10) as `foo`
+```
 
 ## Teradata
 
