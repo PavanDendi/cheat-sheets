@@ -58,6 +58,19 @@ val teradf = spark.read.format("jdbc")
     .option("driver","com.teradata.jdbc.TeraDriver")
     .load()
 ```
+
+### NullPointerException Error
+https://stackoverflow.com/questions/45933846/nullpointerexception-after-extracting-a-teradata-table-with-scala-spark
+
+If loading a jdbc dataframe is successful, but a `df.show` fails with a NullPointerException:
+```
+java.lang.NullPointerException at org.apache.spark.sql.catalyst.expressions.codegen.UnsafeRowWriter.write(UnsafeRowWriter.java:210)
+```
+The problem might be how the teradata jdbc drivers are handling null values in the tables.  
+This can be fixed by using jdbc version 16.20.00.08 and adding `MAYBENULL=ON` to the url
+```
+.option("url","jdbc:teradata://server_ip/MAYBENULL=ON")
+```
 ## Microsoft SQL Server
 
 ### Add JDBC driver as dependency or include jar file
