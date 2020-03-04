@@ -4,6 +4,25 @@ Spark master must be local.  If it is YARN, file will not be found unless file e
 val df = spark.read.parquet("file:///absolute_path/to/file.parquet")
 ```
 
+## get files from http url
+```
+val dataUrl = "https://...."
+sc.addFile(dataUrl)
+val data = spark.read.csv(SparkFiles.get(dataUrl.split("/").last))
+```
+for databricks, prepend "file://" so it reads from local file system
+```
+val fileName = s"""file://${SparkFiles.get("parkinsons.data")}"""
+val data = spark.read.csv(fileName)
+```
+not using SparkFiles and reading directly into memory
+```
+val dataUrl = "https://..../parkinsons.data"
+val dataTxt = scala.io.Source.fromURL(dataUrl).mkString
+val dataDS = dataTxt.lines.toList.toDS
+val dataDF = spark.read.csv(dataDS)
+```
+
 ## reading csv using custom schema
 ```
 import org.apache.spark.sql.types._
